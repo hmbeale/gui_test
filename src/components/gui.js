@@ -5,6 +5,7 @@ import Card from '@material-ui/core/Card';
 import MyCardMedia from './myCardMedia';
 import MyCardContent from './myCardContent.js';
 import MyCardActions from './myCardActions.js';
+import DynamicClassName from './overrideTest.js';
 
 const styles = theme => ({
   layout: {
@@ -32,6 +33,7 @@ function GUI(props) {
     <Card className={classes.card}>
       <MyCardMedia />
       <MyCardContent />
+      <DynamicClassName />
       <MyCardActions />
     </Card>
 
