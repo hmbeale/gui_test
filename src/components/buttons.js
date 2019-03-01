@@ -16,6 +16,7 @@ function ContainedButtons(props) {
   const { classes } = props;
   function handleClick(e) {
   e.preventDefault();
+
   console.log('The link was clicked.');
   }
   return (
