@@ -1,10 +1,10 @@
 import React from "react";
-import MediaCard from "./components/mcard.js";
+import GUI from "./components/gui.js";
 
 class App extends React.Component {
   render() {
     return (
-      <MediaCard />
+      <GUI />
     )
   }
 }

@@ -20,33 +20,18 @@ function ContainedButtons(props) {
   }
   return (
     <div>
-      <Button variant="contained" className={classes.button} onClick={handleClick}>
-        Default
+      <Button variant="contained" color="secondary" className={classes.button} onClick={handleClick}>
+        ButtonOne
       </Button>
       <Button variant="contained" color="primary" className={classes.button} onClick={handleClick}>
-        Primary
+        ButtonTwo
       </Button>
-      <Button variant="contained" color="secondary" className={classes.button} onClick={handleClick}>
-        Secondary
+      <Button variant="contained" color="primary" className={classes.button} onClick={handleClick}>
+        ButtonThree
       </Button>
-      <Button variant="contained" color="secondary" disabled className={classes.button} onClick={handleClick}>
-        Disabled
+      <Button variant="contained" className={classes.button} onClick={handleClick}>
+        ButtonFour
       </Button>
-      <Button variant="contained" href="#contained-buttons" className={classes.button} onClick={handleClick}>
-        Link
-      </Button>
-      <input
-        accept="image/*"
-        className={classes.input}
-        id="contained-button-file"
-        multiple
-        type="file"
-      />
-      <label htmlFor="contained-button-file">
-        <Button variant="contained" component="span" className={classes.button}>
-          Upload
-        </Button>
-      </label>
     </div>
   );
 }

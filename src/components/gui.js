@@ -2,28 +2,45 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '@material-ui/core/styles';
 import Card from '@material-ui/core/Card';
-import CardActionArea from '@material-ui/core/CardActionArea';
 import CardActions from '@material-ui/core/CardActions';
 import CardContent from '@material-ui/core/CardContent';
 import CardMedia from '@material-ui/core/CardMedia';
-import Button from '@material-ui/core/Button';
 import Typography from '@material-ui/core/Typography';
 import ContainedButtons from './buttons.js';
 
-const styles = {
+const styles = theme => ({
+  layout: {
+    width: "auto",
+    marginLeft: theme.spacing.unit * 3,
+    marginRight: theme.spacing.unit * 3,
+    [theme.breakpoints.up(1100 + theme.spacing.unit * 3 * 2)]: {
+      width: 1100,
+      marginLeft: "auto",
+      marginRight: "auto"
+    }
+  },
   card: {
-    maxWidth: 345,
+    marginTop: theme.spacing.unit * 4,
+    maxWidth: 375,
+    marginLeft: "auto",
+    marginRight: "auto",
   },
   media: {
-    height: 140,
-  },
-};
+  height: 300,
+  }
+});
 
-function MediaCard(props) {
+function GUI(props) {
   const { classes } = props;
+
+  function handleClick(e) {
+  e.preventDefault();
+  Typography.setState = {text: 'test'};
+  console.log('The link was clicked.');
+  }
+
   return (
     <Card className={classes.card}>
-      <CardActionArea>
         <CardMedia
           className={classes.media}
           image= {require ('../thumbnails/map0.png')}
@@ -34,26 +51,22 @@ function MediaCard(props) {
             Map
           </Typography>
           <Typography component="p">
-            Lorem ipsum dolor sit amet 3.1415926535 et al
+            Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do
+            eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim
+            ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut
+            aliquip
           </Typography>
         </CardContent>
-      </CardActionArea>
       <CardActions>
-        <Button size="small" color="primary">
-          Share
-        </Button>
-        <Button size="small" color="primary">
-          Learn More
-        </Button>
+        <ContainedButtons  onClick={handleClick} />
       </CardActions>
-    <ContainedButtons />
     </Card>
 
   );
 }
 
-MediaCard.propTypes = {
+GUI.propTypes = {
   classes: PropTypes.object.isRequired,
 };
 
-export default withStyles(styles)(MediaCard);
+export default withStyles(styles)(GUI);
