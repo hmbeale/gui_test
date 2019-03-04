@@ -10,13 +10,10 @@ const styles = theme => ({
   }
 });
 
-let hello = 'helloTho';
-
 function MyCardContent(props) {
 
   return (
     <CardContent>
-      {hello}
       <Typography gutterBottom variant="h5" component="h2">
         Map
       </Typography>

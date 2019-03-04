@@ -3,6 +3,8 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
+import MyCardContent from './myCardContent';
+import Typography from '@material-ui/core/Typography';
 
 const styles = {
   button: {
@@ -23,20 +25,22 @@ const styles = {
 class DynamicClassName extends React.Component {
   state = {
     color: 'default',
+    text: 'initial text'
   };
 
   handleClick = event => {
-    this.setState({ color: this.state.color === 'green' ? 'grey' : 'green' });
+    this.setState({ text: this.state.text === 'anotherSampleText' ? 'sampleText' : 'anotherSampleText',
+      color: this.state.color === 'green' ? 'grey' : 'green' });
   };
 
   render() {
     const { classes } = this.props;
     return (
       <React.Fragment>
-      <Button
-        variant="contained"
-        onClick={this.handleClick}
-      >
+        <Typography gutterBottom variant="h5" component="h2">
+          {this.state.text}
+        </Typography>
+      <Button variant="contained" onClick={this.handleClick}>
         click me to change colors
       </Button>
         <Button
@@ -44,7 +48,10 @@ class DynamicClassName extends React.Component {
             [classes.altButton]: this.state.color === 'green',
           })}
         >
-          {'I change colors'}
+        <Typography component="p">
+          {this.state.text}
+        </Typography>
+
         </Button>
       </React.Fragment>
     );

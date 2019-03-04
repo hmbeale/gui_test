@@ -5,7 +5,7 @@ import Card from '@material-ui/core/Card';
 import MyCardMedia from './myCardMedia';
 import MyCardContent from './myCardContent.js';
 import MyCardActions from './myCardActions.js';
-import DynamicClassName from './overrideTest.js';
+import DynamicClassName from './dynamicClassName.js';
 
 const styles = theme => ({
   layout: {
@@ -26,19 +26,36 @@ const styles = theme => ({
   }
 });
 
-function GUI(props) {
-  const { classes } = props;
+class GUI extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  return (
-    <Card className={classes.card}>
-      <MyCardMedia />
-      <MyCardContent />
-      <DynamicClassName />
-      <MyCardActions />
-    </Card>
+  handleClick(e) {
+    this.props.handleClick(e.target.value);
+  }
 
-  );
+  render() {
+    const fancyText = this.props.fancyText;
+    const { classes } = this.props;
+    return (
+      <Card className={classes.card}>
+        <MyCardMedia />
+        <MyCardContent />
+        <DynamicClassName
+          fancyText = {fancyText}
+          handleClick={this.handleClick}/>
+        <MyCardActions />
+      </Card>
+    );
+  }
 }
+
+
+
+
+
 
 GUI.propTypes = {
   classes: PropTypes.object.isRequired,
