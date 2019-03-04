@@ -10,19 +10,21 @@ const styles = theme => ({
 });
 
 class MyCardActions extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+
+  handleButtonOneClick = () => {
+    this.props.handleButtonOneClick();
   }
 
-  handleClick = () => {
-    this.props.handleClick();
+  handleButtonTwoClick = () => {
+    this.props.handleButtonTwoClick();
   }
 
   render() {
     return (
       <CardActions>
-        <ContainedButtons handleClick = {this.handleClick}/>
+        <ContainedButtons
+          handleButtonOneClick = {this.handleButtonOneClick}
+          handleButtonTwoClick = {this.handleButtonTwoClick}/>
       </CardActions>
     );
   }

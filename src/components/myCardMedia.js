@@ -9,6 +9,7 @@ const styles = theme => ({
   }
 });
 
+
 function MyCardMedia(props) {
   const { classes } = props;
 
@@ -16,7 +17,7 @@ function MyCardMedia(props) {
     <CardMedia
       className={classes.media}
       image= {require ('../thumbnails/map0.png')}
-      title="image0"
+      title={props.mediaPath}
     />
   );
 }

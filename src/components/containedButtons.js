@@ -13,13 +13,13 @@ const styles = theme => ({
 });
 
 class ContainedButtons extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+
+  handleButtonOneClick = () => {
+    this.props.handleButtonOneClick();
   }
 
-  handleClick = () => {
-    this.props.handleClick();
+  handleButtonTwoClick = () => {
+    this.props.handleButtonTwoClick();
   }
 
   render() {
@@ -30,7 +30,7 @@ class ContainedButtons extends React.Component {
           variant="contained"
           color="secondary"
           className={classes.button}
-          onClick={this.handleClick}
+          onClick={this.handleButtonOneClick}
         >
           ButtonOne
         </Button>
@@ -38,7 +38,7 @@ class ContainedButtons extends React.Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={this.handleClick}
+          onClick = {this.handleButtonTwoClick}
         >
           ButtonTwo
         </Button>
@@ -46,14 +46,12 @@ class ContainedButtons extends React.Component {
           variant="contained"
           color="primary"
           className={classes.button}
-          onClick={this.handleClick}
         >
           ButtonThree
         </Button>
         <Button
           variant="contained"
           className={classes.button}
-          onClick={this.handleClick}
         >
           ButtonFour
         </Button>

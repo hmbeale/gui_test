@@ -27,23 +27,28 @@ const styles = theme => ({
 });
 
 class GUI extends React.Component {
-  constructor(props) {
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
+
+  handleButtonOneClick = () => {
+    this.props.handleButtonOneClick();
   }
 
-  handleClick = () => {
-    this.props.handleClick();
+  handleButtonTwoClick = () => {
+    this.props.handleButtonTwoClick();
   }
 
   render() {
-    const fancyText = this.props.fancyText;
     const { classes } = this.props;
+    const fancyText = this.props.fancyText;
+    const mediaPath = this.props.mediaPath;
+
     return (
       <Card className={classes.card}>
-        <MyCardMedia />
+        <MyCardMedia mediaPath = {mediaPath} />
         <MyCardContent fancyText = {fancyText} />
-        <MyCardActions handleClick = {this.handleClick}/>
+        <MyCardActions
+          handleButtonOneClick = {this.handleButtonOneClick}
+          handleButtonTwoClick = {this.handleButtonTwoClick}
+          />
       </Card>
     );
   }
