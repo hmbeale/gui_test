@@ -12,50 +12,54 @@ const styles = theme => ({
   }
 });
 
-
-function ContainedButtons(props) {
-
-  const { classes } = props;
-  function handleClick(e) {
-    e.preventDefault();
-
-    console.log("The link was clicked.");
+class ContainedButtons extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
   }
-  return (
-    <div>
-      <Button
-        variant="contained"
-        color="secondary"
-        className={classes.button}
-        onClick={handleClick}
-      >
-        ButtonOne
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={handleClick}
-      >
-        ButtonTwo
-      </Button>
-      <Button
-        variant="contained"
-        color="primary"
-        className={classes.button}
-        onClick={handleClick}
-      >
-        ButtonThree
-      </Button>
-      <Button
-        variant="contained"
-        className={classes.button}
-        onClick={handleClick}
-      >
-        ButtonFour
-      </Button>
-    </div>
-  );
+
+  handleClick = () => {
+    this.props.handleClick();
+  }
+
+  render() {
+    const { classes } = this.props;
+    return (
+      <div>
+        <Button
+          variant="contained"
+          color="secondary"
+          className={classes.button}
+          onClick={this.handleClick}
+        >
+          ButtonOne
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.handleClick}
+        >
+          ButtonTwo
+        </Button>
+        <Button
+          variant="contained"
+          color="primary"
+          className={classes.button}
+          onClick={this.handleClick}
+        >
+          ButtonThree
+        </Button>
+        <Button
+          variant="contained"
+          className={classes.button}
+          onClick={this.handleClick}
+        >
+          ButtonFour
+        </Button>
+      </div>
+    );
+  }
 }
 
 ContainedButtons.propTypes = {

@@ -9,14 +9,27 @@ const styles = theme => ({
   }
 });
 
-function MyCardActions(props) {
+class MyCardActions extends React.Component {
+  constructor(props) {
+    super(props);
+    this.handleClick = this.handleClick.bind(this);
+  }
 
-  return (
-  <CardActions>
-    <ContainedButtons />
-  </CardActions>
+  handleClick = () => {
+    this.props.handleClick();
+  }
 
-  );
+  render() {
+    return (
+      <CardActions>
+        <ContainedButtons handleClick = {this.handleClick}/>
+      </CardActions>
+    );
+  }
 }
+
+
+
+
 
 export default withStyles(styles)(MyCardActions);

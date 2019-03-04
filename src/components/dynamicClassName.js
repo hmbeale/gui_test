@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '@material-ui/core/styles';
 import Button from '@material-ui/core/Button';
-import MyCardContent from './myCardContent';
+//import MyCardContent from './myCardContent';
 import Typography from '@material-ui/core/Typography';
 
 const styles = {
@@ -25,7 +25,7 @@ const styles = {
 class DynamicClassName extends React.Component {
   state = {
     color: 'default',
-    text: 'initial text'
+    text: this.props.text
   };
 
   handleClick = event => {
