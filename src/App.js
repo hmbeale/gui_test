@@ -1,7 +1,7 @@
 import React from "react";
 import GUI from "./components/gui.js";
 import { playerMoveForward, playerAttack, playerDefend,
-         playerFlee } from './components/logic.js'
+         playerFlee } from './components/mainLogic.js'
 
 
 class App extends React.Component {
