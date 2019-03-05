@@ -19,12 +19,23 @@ class MyCardActions extends React.Component {
     this.props.handleButtonTwoClick();
   }
 
+  handleButtonThreeClick = () => {
+    this.props.handleButtonThreeClick();
+  }
+
+  handleButtonFourClick = () => {
+    this.props.handleButtonFourClick();
+  }
+
   render() {
     return (
       <CardActions>
         <ContainedButtons
           handleButtonOneClick = {this.handleButtonOneClick}
-          handleButtonTwoClick = {this.handleButtonTwoClick}/>
+          handleButtonTwoClick = {this.handleButtonTwoClick}
+          handleButtonThreeClick = {this.handleButtonThreeClick}
+          handleButtonFourClick = {this.handleButtonFourClick}
+          />
       </CardActions>
     );
   }

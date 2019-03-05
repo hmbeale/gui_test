@@ -1,39 +1,56 @@
 import React from "react";
 import GUI from "./components/gui.js";
+import { playerMoveForward, playerAttack, playerDefend,
+         playerFlee } from './components/logic.js'
+
 
 class App extends React.Component {
 
   constructor(props) {
     super(props);
     this.state = {
-      fancyText: 'click button one',
-      mediaPath: '../thumbnails/map0.png',
+      lineOneText: 'welcome text'
     };
   }
 
   handleButtonOneClick = () => {
-    this.setState({fancyText: this.state.fancyText ===
+    this.setState(
+      {
+      lineOneText: this.state.lineOneText ===
       'click button one again' ?
       'click button one':
       'click button one again'});
+
+      playerMoveForward();
   }
 
   handleButtonTwoClick = () => {
-    console.log('clicked');
+    playerAttack();
+  }
+
+  handleButtonThreeClick = () => {
+    playerDefend();
+  }
+
+  handleButtonFourClick = () => {
+    playerFlee();
   }
 
   render() {
-    const fancyText = this.state.fancyText;
+    const lineOneText = this.state.lineOneText;
     const mediaPath = this.state.mediaPath;
 
     return (
       <GUI
-        fancyText = {fancyText}
+        lineOneText = {lineOneText}
         mediaPath = {mediaPath}
         handleButtonOneClick={this.handleButtonOneClick}
         handleButtonTwoClick = {this.handleButtonTwoClick}
+        handleButtonThreeClick = {this.handleButtonThreeClick}
+        handleButtonFourClick = {this.handleButtonFourClick}
         />
     )
   }
 }
+
 export default App;

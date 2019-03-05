@@ -22,6 +22,14 @@ class ContainedButtons extends React.Component {
     this.props.handleButtonTwoClick();
   }
 
+  handleButtonThreeClick = () => {
+    this.props.handleButtonThreeClick();
+  }
+
+  handleButtonFourClick = () => {
+    this.props.handleButtonFourClick();
+  }
+
   render() {
     const { classes } = this.props;
     return (
@@ -46,12 +54,14 @@ class ContainedButtons extends React.Component {
           variant="contained"
           color="primary"
           className={classes.button}
+          onClick = {this.handleButtonThreeClick}
         >
           ButtonThree
         </Button>
         <Button
           variant="contained"
           className={classes.button}
+          onClick = {this.handleButtonFourClick}
         >
           ButtonFour
         </Button>

@@ -18,7 +18,7 @@ function MyCardContent(props) {
         Map
       </Typography>
       <Typography component="p">
-        {props.fancyText}
+        {props.lineOneText}
       </Typography>
     </CardContent>
   );
