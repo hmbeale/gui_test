@@ -1,5 +1,5 @@
 import {player, playerDispositions, creature, creatureSizes, creatureTypes, scenery,
-        sceneryAdjectives, sceneryTypes} from './objects.js'
+        sceneryAdjectives, sceneryTypes, distNeeded} from './objects.js'
 
 const getRandom = (min, max) => {
   min = Math.ceil(min);
@@ -12,11 +12,22 @@ const moveForward = () => {
   player.distanceTraveled++;
 };
 
+const checkPlayerSuccess = () => {
+  if (player.distanceTraveled >= distNeeded) {
+    console.log('you made it to your destination, congratulations');
+    process.exit();
+  }
+}
+
 const updateScenery = () => {
   scenery.type = sceneryTypes[getRandom(0, sceneryTypes.length - 1)];
   scenery.adjective =
     sceneryAdjectives[getRandom(0, sceneryAdjectives.length - 1)];
 };
+
+const describeScenery = () => {
+  console.log(`you see a ${scenery.adjective} ${scenery.type} \n`);
+}
 
 const updatePlayerDisposition = () => {
   player.disposition =
@@ -96,4 +107,5 @@ const playerHeal = (healAmount) => {
 
 export  {getRandom, moveForward, updateScenery, updatePlayerDisposition,
          startCombat, createCreature, standardCombatRound, resolveCombatDamage,
-         slaycreature, playerCombatDeath, postCombatHeal, playerHeal};
+         slaycreature, playerCombatDeath, postCombatHeal, playerHeal, checkPlayerSuccess,
+       describeScenery};

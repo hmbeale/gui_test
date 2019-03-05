@@ -1,14 +1,13 @@
 import {getRandom, moveForward, updateScenery, updatePlayerDisposition,
-         startCombat, standardCombatRound, postCombatHeal, playerHeal} from './logic.js'
-import {player, creature, scenery, distNeeded} from './objects.js'
+         startCombat, standardCombatRound, postCombatHeal, playerHeal,
+       checkPlayerSuccess, describeScenery} from './logic.js'
+//I feel like importing these things here and to logic.js might be a bad idea but idk
+import {player, creature} from './objects.js'
 
 const playerMoveForward = () => {
   if (!player.inCombat){
 
-    if (player.distanceTraveled >= distNeeded) {
-      console.log('you made it to your destination, congratulations');
-      process.exit();
-    }
+    checkPlayerSuccess();
 
     let randNum = getRandom(1, 40);
 
@@ -26,7 +25,7 @@ const playerMoveForward = () => {
     if (randNum >= 30 && randNum <= 36) {
       moveForward();
       updateScenery();
-      console.log(`you see a ${scenery.adjective} ${scenery.type} \n`);
+      describeScenery();
     }
 
     if (randNum >= 37 && randNum <= 38) {
