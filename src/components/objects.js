@@ -1,6 +1,5 @@
 
 const player = {
-
   attack : 3,
   attackPenalty : 2,
   defenseValue : 1,
@@ -22,11 +21,12 @@ const playerDispositions = [
   'sweat trickles from your brow'
 ];
 
-const creature = new Object();
-creature.type = '';
-creature.adjective = '';
-creature.health = 0;
-creature.attack = 0;
+const creature = {
+  type : '',
+  adjective : '',
+  health : 0,
+  attack : 0
+}
 
 const creatureSizes = ['delicate', 'medium sized', 'large', 'hulking'];
 const creatureTypes = [
@@ -36,9 +36,11 @@ const creatureTypes = [
   'creature with flames dripping from its jaws'
 ];
 
-const scenery = new Object();
-scenery.adjective = '';
-scenery.type = '';
+const scenery = {
+  adjective : '',
+  type : ''
+}
+
 
 const sceneryAdjectives = ['small', 'big', 'dark', 'sunlit'];
 const sceneryTypes = ['river', 'pool of water', 'tree', 'cluster of bushes',

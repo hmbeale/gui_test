@@ -47,11 +47,10 @@ class GUI extends React.Component {
   render() {
     const { classes } = this.props;
     const lineOneText = this.props.lineOneText;
-    const mediaPath = this.props.mediaPath;
 
     return (
       <Card className={classes.card}>
-        <MyCardMedia mediaPath = {mediaPath} />
+        <MyCardMedia />
         <MyCardContent
           lineOneText = {lineOneText} />
         <MyCardActions
