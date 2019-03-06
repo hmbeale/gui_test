@@ -13,12 +13,8 @@ const playerMoveForward = () => {
   if (player.inCombat){
     outputText+= 'you are in combat';
   }
-  if (player.reachedDestination){
-    return 'you made it. Time to take a break\n' +
-           'refresh the page for another journey'
-  }
 
-  if (!player.inCombat && player.isAlive){
+  if (!player.inCombat && player.isAlive && !player.reachedDestination){
 
     outputText+= checkPlayerSuccess();
 
@@ -69,11 +65,11 @@ const playerAttack = () => {
                  'try refreshing the page for another chance at life';
   }
   let outputText = '';
-  if (!player.inCombat){
+  if (!player.inCombat && !player.reachedDestination){
     outputText+= 'you are not in combat';
   }
 
-  if (player.inCombat && player.isAlive){
+  if (player.inCombat && player.isAlive && !player.reachedDestination){
     outputText+= 'you attack\n'
     outputText+= standardCombatRound(player.attack, creature.attack);
   }
@@ -87,10 +83,10 @@ const playerDefend = () => {
                  'try refreshing the page for another chance at life';
   }
   let outputText = '';
-  if (!player.inCombat){
+  if (!player.inCombat && !player.reachedDestination){
     outputText+= 'you are not in combat';
   }
-  if (player.inCombat && player.isAlive){
+  if (player.inCombat && player.isAlive && !player.reachedDestination){
     outputText+= 'you defend\n';
     outputText+= standardCombatRound(
       player.attack - player.attackPenalty,
@@ -106,10 +102,10 @@ const playerFlee = () => {
                  'try refreshing the page for another chance at life';
   }
   let outputText = '';
-    if (!player.inCombat){
+    if (!player.inCombat && !player.reachedDestination){
       outputText+= 'you are not in combat';
     }
-    if (player.inCombat && player.isAlive) {
+    if (player.inCombat && player.isAlive && !player.reachedDestination) {
       outputText+= 'you flee \n'
       let randNum = getRandom(1, 4);
 
