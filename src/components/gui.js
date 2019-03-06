@@ -44,15 +44,21 @@ class GUI extends React.Component {
     this.props.handleButtonFourClick();
   }
 
+
   render() {
     const { classes } = this.props;
-    const lineOneText = this.props.lineOneText;
+    const blockOneText = this.props.blockOneText;
+    const blockTwoText = this.props.blockTwoText;
+    const blockThreeText = this.props.blockThreeText;
 
     return (
       <Card className={classes.card}>
         <MyCardMedia />
         <MyCardContent
-          lineOneText = {lineOneText} />
+          blockOneText = {blockOneText}
+          blockTwoText = {blockTwoText}
+          blockThreeText = {blockThreeText}
+          />
         <MyCardActions
           handleButtonOneClick = {this.handleButtonOneClick}
           handleButtonTwoClick = {this.handleButtonTwoClick}

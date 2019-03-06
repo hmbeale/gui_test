@@ -15,7 +15,8 @@ const moveForward = () => {
 const checkPlayerSuccess = () => {
   if (player.distanceTraveled >= distNeeded) {
     player.reachedDestination = true;
-    return 'you made it to your destination, congratulations';
+    return 'you made it to your destination, congratulations\n' +
+          'refresh the page if you want another journey';
   }
   return '';
 }

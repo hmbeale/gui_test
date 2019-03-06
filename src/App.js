@@ -9,44 +9,61 @@ class App extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      lineOneText: 'welcome text'
+      blockOneText: 'welcome text',
+      blockTwoText: 'textTwo',
+      blockThreeText: 'textThree'
     };
   }
 
   handleButtonOneClick = () => {
     this.setState(
       {
-      lineOneText: this.state.lineOneText ===
-      'click button one again' ?
-      'click button one':
-      'click button one again'});
-
-      console.log(playerMoveForward());
+      blockThreeText: this.state.blockTwoText,
+      blockTwoText: this.state.blockOneText,
+      //blockOneText: playerMoveForward(),
+     });
   }
 
   handleButtonTwoClick = () => {
     //playerAttack returns text based on game logic
-    console.log(playerAttack());
+    this.setState(
+      {
+      blockThreeText: this.state.blockTwoText,
+      blockTwoText: this.state.blockOneText,
+      //blockOneText: playerAttack(),
+     });
   }
 
   handleButtonThreeClick = () => {
     //playerDefend returns text based on game logic
-    console.log(playerDefend());
+    this.setState(
+      {
+      blockThreeText: this.state.blockTwoText,
+      blockTwoText: this.state.blockOneText,
+      //blockOneText: playerDefend(),
+     });
   }
 
   handleButtonFourClick = () => {
     //playerFlee returns text based on game logic
-    console.log(playerFlee());
+    this.setState(
+      {
+      blockThreeText: this.state.blockTwoText,
+      blockTwoText: this.state.blockOneText,
+      //blockOneText: playerFlee(),
+     });
   }
 
   render() {
-    const lineOneText = this.state.lineOneText;
-    const mediaPath = this.state.mediaPath;
+    const blockOneText = this.state.blockOneText;
+    const blockTwoText = this.state.blockTwoText;
+    const blockThreeText = this.state.blockThreeText;
 
     return (
       <GUI
-        lineOneText = {lineOneText}
-        mediaPath = {mediaPath}
+        blockOneText = {blockOneText}
+        blockTwoText = {blockTwoText}
+        blockThreeText = {blockThreeText}
         handleButtonOneClick={this.handleButtonOneClick}
         handleButtonTwoClick = {this.handleButtonTwoClick}
         handleButtonThreeClick = {this.handleButtonThreeClick}

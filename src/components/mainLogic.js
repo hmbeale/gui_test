@@ -4,17 +4,26 @@ import {getRandom, moveForward, updateScenery, updatePlayerDisposition,
 //I feel like importing these things here and to logic.js might be a bad idea but idk
 import {player, creature} from './objects.js'
 
+
+//handles player input
+//player can move forward, attack, defend, and flee
+
+//each move forward procedurally generates a new scenario
+//based on a 'roll' from 1 to 40
 const playerMoveForward = () => {
+  if (player.reachedDestination){
+    return;
+  }
   if (!player.isAlive){
     return 'unfortunately, you are dead and cannot take any action\n' +
                  'try refreshing the page for another chance at life';
   }
-  let outputText = '';
   if (player.inCombat){
-    outputText+= 'you are in combat';
+    return 'you are in combat and cannot progress';
   }
 
-  if (!player.inCombat && player.isAlive && !player.reachedDestination){
+  let outputText = '';
+  if (!player.inCombat){
 
     outputText+= checkPlayerSuccess();
 
@@ -59,17 +68,22 @@ const playerMoveForward = () => {
   return outputText;
 }
 
+//player can only attack if in combat and not in an endgame state
 const playerAttack = () => {
+  if (player.reachedDestination){
+    return;
+  }
   if (!player.isAlive){
     return 'unfortunately, you are dead and cannot take any action\n' +
                  'try refreshing the page for another chance at life';
   }
+
   let outputText = '';
-  if (!player.inCombat && !player.reachedDestination){
+  if (!player.inCombat){
     outputText+= 'you are not in combat';
   }
 
-  if (player.inCombat && player.isAlive && !player.reachedDestination){
+  if (player.inCombat){
     outputText+= 'you attack\n'
     outputText+= standardCombatRound(player.attack, creature.attack);
   }
@@ -77,16 +91,21 @@ const playerAttack = () => {
   return outputText;
 }
 
+//player can only defend if in combat and not in an endgame state
+//weaker than attacking but player gets defensive bonus
 const playerDefend = () => {
+  if (player.reachedDestination){
+    return;
+  }
   if (!player.isAlive){
     return 'unfortunately, you are dead and cannot take any action\n' +
                  'try refreshing the page for another chance at life';
   }
   let outputText = '';
-  if (!player.inCombat && !player.reachedDestination){
+  if (!player.inCombat){
     outputText+= 'you are not in combat';
   }
-  if (player.inCombat && player.isAlive && !player.reachedDestination){
+  if (player.inCombat){
     outputText+= 'you defend\n';
     outputText+= standardCombatRound(
       player.attack - player.attackPenalty,
@@ -96,16 +115,22 @@ const playerDefend = () => {
   return outputText;
 }
 
+//player can only flee if in combat and not in an endgame state
+//25% chance to get away with a distance attackPenalty
+//75% chance to be caught and mauled badly
 const playerFlee = () => {
+  if (player.reachedDestination){
+    return;
+  }
   if (!player.isAlive){
     return 'unfortunately, you are dead and cannot take any action\n' +
                  'try refreshing the page for another chance at life';
   }
   let outputText = '';
-    if (!player.inCombat && !player.reachedDestination){
+    if (!player.inCombat){
       outputText+= 'you are not in combat';
     }
-    if (player.inCombat && player.isAlive && !player.reachedDestination) {
+    if (player.inCombat) {
       outputText+= 'you flee \n'
       let randNum = getRandom(1, 4);
 

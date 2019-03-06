@@ -30,6 +30,7 @@ class ContainedButtons extends React.Component {
     this.props.handleButtonFourClick();
   }
 
+
   render() {
     const { classes } = this.props;
     return (

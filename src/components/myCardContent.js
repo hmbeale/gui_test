@@ -18,7 +18,13 @@ function MyCardContent(props) {
         Map
       </Typography>
       <Typography component="p">
-        {props.lineOneText}
+        {props.blockThreeText}
+      </Typography>
+      <Typography component="p">
+        {props.blockTwoText}
+      </Typography>
+      <Typography component="p">
+        {props.blockOneText}
       </Typography>
     </CardContent>
   );
