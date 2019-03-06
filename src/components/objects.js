@@ -11,7 +11,10 @@ const player = {
 
   inCombat : false,
   disposition : '',
-  distanceTraveled : 0
+  distanceTraveled : 0,
+
+  isAlive : true,
+  reachedDestination : false
 };
 
 const playerDispositions = [

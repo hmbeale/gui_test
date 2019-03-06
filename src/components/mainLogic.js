@@ -5,90 +5,129 @@ import {getRandom, moveForward, updateScenery, updatePlayerDisposition,
 import {player, creature} from './objects.js'
 
 const playerMoveForward = () => {
-  if (!player.inCombat){
+  if (!player.isAlive){
+    return 'unfortunately, you are dead and cannot take any action\n' +
+                 'try refreshing the page for another chance at life';
+  }
+  let outputText = '';
+  if (player.inCombat){
+    outputText+= 'you are in combat';
+  }
+  if (player.reachedDestination){
+    return 'you made it. Time to take a break\n' +
+           'refresh the page for another journey'
+  }
 
-    checkPlayerSuccess();
+  if (!player.inCombat && player.isAlive){
+
+    outputText+= checkPlayerSuccess();
 
     let randNum = getRandom(1, 40);
 
     if (randNum <= 6) {
-      moveForward();
+      outputText+= moveForward();
       startCombat();
-      console.log(`you encounter a ${creature.adjective} ${creature.type} \n`);
+      outputText+= `you encounter a ${creature.adjective} ${creature.type} \n`
     }
 
     if (randNum >= 7 && randNum <= 29) {
-      moveForward();
-      console.log('');
+      outputText+= moveForward();
     }
 
     if (randNum >= 30 && randNum <= 36) {
-      moveForward();
+      outputText+= moveForward();
       updateScenery();
-      describeScenery();
+      outputText+= describeScenery();
     }
 
     if (randNum >= 37 && randNum <= 38) {
-      moveForward();
+      outputText+= moveForward();
       updatePlayerDisposition();
-      console.log(player.disposition + '\n');
+      outputText+= player.disposition + '\n';
     }
 
     if (randNum === 39) {
-      moveForward();
-      console.log('you find some medical supplies');
+      outputText+= moveForward();
+      outputText+= 'you find some medical supplies\n';
       playerHeal(5);
-      console.log(`your health is ${player.health}/${player.maxHealth} \n`);
+      outputText+= `your health is ${player.health}/${player.maxHealth} \n`
     }
 
     if (randNum === 40) {
-      moveForward();
-      console.log('you find a better weapon \n');
+      outputText+= moveForward();
+      outputText+= 'you find a better weapon \n';
       player.attack++;
     }
   }
+
+  return outputText;
 }
 
 const playerAttack = () => {
-  if (player.inCombat){
-    console.log('you defend');
-    standardCombatRound(
+  if (!player.isAlive){
+    return 'unfortunately, you are dead and cannot take any action\n' +
+                 'try refreshing the page for another chance at life';
+  }
+  let outputText = '';
+  if (!player.inCombat){
+    outputText+= 'you are not in combat';
+  }
+
+  if (player.inCombat && player.isAlive){
+    outputText+= 'you attack\n'
+    outputText+= standardCombatRound(player.attack, creature.attack);
+  }
+
+  return outputText;
+}
+
+const playerDefend = () => {
+  if (!player.isAlive){
+    return 'unfortunately, you are dead and cannot take any action\n' +
+                 'try refreshing the page for another chance at life';
+  }
+  let outputText = '';
+  if (!player.inCombat){
+    outputText+= 'you are not in combat';
+  }
+  if (player.inCombat && player.isAlive){
+    outputText+= 'you defend\n';
+    outputText+= standardCombatRound(
       player.attack - player.attackPenalty,
       creature.attack - player.defenseValue
     );
   }
-}
-
-const playerDefend = () => {
-  if (player.inCombat){
-    console.log('you attack');
-    standardCombatRound(player.attack, creature.attack);
-  }
+  return outputText;
 }
 
 const playerFlee = () => {
-
-    if (player.inCombat) {
-      console.log('you flee');
+  if (!player.isAlive){
+    return 'unfortunately, you are dead and cannot take any action\n' +
+                 'try refreshing the page for another chance at life';
+  }
+  let outputText = '';
+    if (!player.inCombat){
+      outputText+= 'you are not in combat';
+    }
+    if (player.inCombat && player.isAlive) {
+      outputText+= 'you flee \n'
       let randNum = getRandom(1, 4);
 
       //flee fails
       if (randNum === 1) {
-        console.log(`the ${creature.type} catches you`);
-        standardCombatRound(0, player.maxHealth - 1);
+        outputText+= `the ${creature.type} catches you\n`
+        outputText+= standardCombatRound(0, player.maxHealth - 1);
       }
 
       //flee succeeds
       if (randNum >= 2) {
         player.inCombat = false;
-        console.log(
-          'you escape successfully but your ' +
+        outputText+= 'you escape successfully but your ' +
             'flight takes you away from your goal \n'
-        );
-        postCombatHeal();
+        outputText+= postCombatHeal();
         player.distanceTraveled = player.distanceTraveled - 5;
       }
     }
-
+  return outputText;
 }
  export {playerMoveForward, playerAttack, playerDefend, playerFlee}

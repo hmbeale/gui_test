@@ -8,15 +8,16 @@ const getRandom = (min, max) => {
 };
 
 const moveForward = () => {
-  console.log('you move forward');
   player.distanceTraveled++;
+  return 'you move forward\n';
 };
 
 const checkPlayerSuccess = () => {
   if (player.distanceTraveled >= distNeeded) {
-    console.log('you made it to your destination, congratulations');
-    process.exit();
+    player.reachedDestination = true;
+    return 'you made it to your destination, congratulations';
   }
+  return '';
 }
 
 const updateScenery = () => {
@@ -26,7 +27,7 @@ const updateScenery = () => {
 };
 
 const describeScenery = () => {
-  console.log(`you see a ${scenery.adjective} ${scenery.type} \n`);
+  return `you see a ${scenery.adjective} ${scenery.type} \n`
 }
 
 const updatePlayerDisposition = () => {
@@ -53,49 +54,54 @@ const createCreature = () => {
 };
 
 const standardCombatRound = (playerAttack, creatureAttack) => {
-  resolveCombatDamage(playerAttack, creatureAttack);
+  let outputText = '';
+  outputText+= resolveCombatDamage(playerAttack, creatureAttack);
   if (creature.health <= 0) {
-    slaycreature();
+    outputText+= slaycreature();
   }
   if (player.health <= 0) {
-    playerCombatDeath();
+    outputText+= playerCombatDeath();
   }
   if (!player.inCombat) {
-    postCombatHeal();
+    outputText+= postCombatHeal();
   }
+
+  return outputText;
 };
 
 const resolveCombatDamage = (playerAttack, creatureAttack) => {
-  console.log(`the ${creature.type} attacks`);
   creature.health = creature.health - playerAttack;
   //makes sure player isn't healed by negative damage
   if (creatureAttack > 0) {
     player.health = player.health - creatureAttack;
   }
-  console.log(`your health is ${player.health}/${player.maxHealth} \n`);
+  return (`the ${creature.type} attacks\nyour health is ${player.health}/${player.maxHealth} \n`)
 };
 
 const slaycreature = () => {
-  console.log(`you slay the ${creature.type} \n`);
   player.inCombat = false;
   creature.attack = 0;
+  return `you slay the ${creature.type} \n`;
 };
 
 const playerCombatDeath = () => {
-  console.log(`the ${creature.type} slays you`);
-  process.exit();
-};
+    player.isAlive = false;
+    return `the ${creature.type} slew you`;
+}
+
 
 const postCombatHeal = () => {
+  let outputText = '';
   if (player.health < player.combatStartHealth) {
-    console.log('you bind your wounds as best you can');
+    outputText += 'you bind your wounds as best you can\n';
+    playerHeal(player.combatHealValue);
+    //fighting shouldn't make you healthier than when you started
+    if (player.health > player.combatStartHealth) {
+      player.health = player.combatStartHealth;
+    }
+    outputText+=`your health is ${player.health}/${player.maxHealth} \n`
   }
-  playerHeal(player.combatHealValue);
-  //fighting shouldn't make you healthier than when you started
-  if (player.health > player.combatStartHealth) {
-    player.health = player.combatStartHealth;
-  }
-  console.log(`your health is ${player.health}/${player.maxHealth} \n`);
+  return outputText;
 };
 
 const playerHeal = (healAmount) => {
@@ -107,5 +113,5 @@ const playerHeal = (healAmount) => {
 
 export  {getRandom, moveForward, updateScenery, updatePlayerDisposition,
          startCombat, createCreature, standardCombatRound, resolveCombatDamage,
-         slaycreature, playerCombatDeath, postCombatHeal, playerHeal, checkPlayerSuccess,
+         slaycreature, postCombatHeal, playerHeal, checkPlayerSuccess,
        describeScenery};

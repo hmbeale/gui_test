@@ -21,19 +21,22 @@ class App extends React.Component {
       'click button one':
       'click button one again'});
 
-      playerMoveForward();
+      console.log(playerMoveForward());
   }
 
   handleButtonTwoClick = () => {
-    playerAttack();
+    //playerAttack returns text based on game logic
+    console.log(playerAttack());
   }
 
   handleButtonThreeClick = () => {
-    playerDefend();
+    //playerDefend returns text based on game logic
+    console.log(playerDefend());
   }
 
   handleButtonFourClick = () => {
-    playerFlee();
+    //playerFlee returns text based on game logic
+    console.log(playerFlee());
   }
 
   render() {
